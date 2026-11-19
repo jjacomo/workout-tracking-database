@@ -1,6 +1,5 @@
-DROP DATABASE IF EXISTS strava_db;
-CREATE DATABASE strava_db;
-USE strava_db;
+CREATE DATABASE workout_tracking_db;
+USE workout_tracking_db;
 
 -- OP1 - UTENTI
 CREATE TABLE UTENTI (
