@@ -21,7 +21,7 @@ The repository includes the database schema, SQL scripts for data population, a 
 
 ## Entity-Relationship Diagram
 
-[![Final E/R schema preview](docs/images/er-schema-preview.png)](docs/Report.pdf)
+[![Final E/R schema preview](docs/images/er-schema.png)](docs/Report.pdf)
 
 ## Repository Structure
 
