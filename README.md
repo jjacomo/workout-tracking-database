@@ -2,35 +2,35 @@
 
 A relational database design and Java desktop application inspired by fitness tracking platforms such as Strava, allowing athletes and clubs to record, manage, and analyze workouts, GPS segments, equipment usage, and competitions.
 
-Developed as the final project for the **Databases** (*Basi di Dati*) course in the B.Sc. in Computer Science and Engineering at the **University of Bologna** (Cesena Campus)[cite: 2, 4].
+Developed as the final project for the **Databases** (*Basi di Dati*) course in the B.Sc. in Computer Science and Engineering at the **University of Bologna** (Cesena Campus).
 
 ---
 
 ## Project Overview & Database Design
 
-The project covers the complete database engineering lifecycle—from requirements analysis and conceptual modeling to logical restructuring, normalization, and physical implementation[cite: 2, 4]:
+The project covers the complete database engineering lifecycle—from requirements analysis and conceptual modeling to logical restructuring, normalization, and physical implementation:
 
 * **Conceptual & Logical Modeling:** Designed an Entity-Relationship (E-R) schema covering **14 core domain entities** (Users, Activities/Workouts, GPS Segments, Segment Crossings, Gear/Equipment, Clubs, Competitions/Races, Registrations, Participations, and Performance Reports)[cite: 1].
-* **Data Integrity & Optimization:** Enforced primary/foreign key constraints, domain checks, and normalized relational tables to eliminate data redundancy while supporting efficient analytical queries[cite: 4].
-* **Analytical & Operational Queries:** Implemented SQL queries to track athlete progress, segment leaderboards, equipment wear, club memberships, and race rankings[cite: 1, 4].
+* **Data Integrity & Optimization:** Enforced primary/foreign key constraints, domain checks, and normalized relational tables to eliminate data redundancy while supporting efficient analytical queries.
+* **Analytical & Operational Queries:** Implemented SQL queries to track athlete progress, segment leaderboards, equipment wear, club memberships, and race rankings.
 
 ---
 
 ## Software Architecture
 
-The companion Java application is structured following the **MVC (Model-View-Controller)** architectural pattern decoupled from persistence via a dedicated **DAO (Data Access Object)** layer over **JDBC**[cite: 1]:
+The companion Java application is structured following the **MVC (Model-View-Controller)** architectural pattern decoupled from persistence via a dedicated **DAO (Data Access Object)** layer over **JDBC**:
 
-* **Model & DAO Layer (`DBModel`, `DAOUtils`, `DAOException`, `Queries`):** Encapsulates SQL statements, connection lifecycle management, and relational-to-object mapping[cite: 1].
-* **Controller Layer:** Coordinates user interactions, input validation, and data flow between the GUI and the persistence layer[cite: 1].
-* **View Layer:** Desktop graphical user interface for browsing workouts, uploading activities, and inspecting reports[cite: 1].
+* **Model & DAO Layer (`DBModel`, `DAOUtils`, `DAOException`, `Queries`):** Encapsulates SQL statements, connection lifecycle management, and relational-to-object mapping.
+* **Controller Layer:** Coordinates user interactions, input validation, and data flow between the GUI and the persistence layer.
+* **View Layer:** Desktop graphical user interface for browsing workouts, uploading activities, and inspecting reports.
 
 ---
 
 ## Tech Stack
 
 * **DBMS:** MariaDB / MySQL
-* **Language:** Java (JDK 17+) & SQL[cite: 2, 7]
-* **Data Access:** JDBC[cite: 1]
+* **Language:** Java (JDK 17+) & SQL
+* **Data Access:** JDBC
 * **Build Tool:** Gradle (Kotlin DSL)
 
 ---
@@ -57,7 +57,7 @@ The companion Java application is structured following the **MVC (Model-View-Con
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/jjacomo/workout-tracking-database.git](https://github.com/jjacomo/workout-tracking-database.git)
+   git clone https://github.com/jjacomo/workout-tracking-database.git
    cd workout-tracking-database
    ```
 
