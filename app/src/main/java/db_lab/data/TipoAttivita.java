@@ -12,7 +12,7 @@ public final class TipoAttivita {
     public final int durataTotale;
 
     public TipoAttivita(int codice, String nome, int numeroAttivita,
-                        double distanzaTotale, int durataTotale) {
+            double distanzaTotale, int durataTotale) {
         this.codice = codice;
         this.nome = nome;
         this.numeroAttivita = numeroAttivita;
@@ -26,22 +26,21 @@ public final class TipoAttivita {
     }
 
     public static final class DAO {
-        private DAO() { }
+        private DAO() {
+        }
 
         public static List<TipoAttivita> list(Connection connection) {
             var result = new ArrayList<TipoAttivita>();
             try (
-                var statement = DAOUtils.prepare(connection, Queries.LIST_TIPI_ATTIVITA);
-                var rs = statement.executeQuery()
-            ) {
+                    var statement = DAOUtils.prepare(connection, Queries.LIST_TIPI_ATTIVITA);
+                    var rs = statement.executeQuery()) {
                 while (rs.next()) {
                     result.add(new TipoAttivita(
-                        rs.getInt("codeType"),
-                        rs.getString("Name"),
-                        rs.getInt("Number of products"),
-                        rs.getDouble("distance"),
-                        rs.getInt("durability")
-                    ));
+                            rs.getInt("codiceTipoAttivita"),
+                            rs.getString("nome"),
+                            rs.getInt("numeroAttivita"),
+                            rs.getDouble("distanzaTotale"),
+                            rs.getInt("durataTotale")));
                 }
             } catch (Exception e) {
                 throw new DAOException(e);
@@ -50,7 +49,7 @@ public final class TipoAttivita {
         }
 
         public static void updateStatistics(Connection connection, int codiceTipoAttivita,
-                                            double distanza, int durata) {
+                double distanza, int durata) {
             try (var statement = DAOUtils.prepare(
                     connection,
                     Queries.UPDATE_STATISTICHE_TIPO_ATTIVITA,
@@ -58,7 +57,7 @@ public final class TipoAttivita {
                 int updated = statement.executeUpdate();
                 if (updated != 1) {
                     throw new DAOException(new IllegalStateException(
-                            "Unexisting type of activity:" + codiceTipoAttivita));
+                            "Tipo attività inesistente: " + codiceTipoAttivita));
                 }
             } catch (DAOException e) {
                 throw e;

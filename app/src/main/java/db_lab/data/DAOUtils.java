@@ -6,11 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public final class DAOUtils {
-    private DAOUtils() { }
+    private DAOUtils() {
+    }
 
     public static Connection localMySQLConnection(String database, String username, String password) {
         try {
-            String url = "jdbc:mysql://localhost:3306/" + database;
+            String url = "jdbc:mysql://localhost:3307/" + database;
             return DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             throw new DAOException(e);

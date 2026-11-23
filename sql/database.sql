@@ -1,4 +1,4 @@
-CREATE DATABASE workout_tracking_db;
+CREATE DATABASE IF NOT EXISTS workout_tracking_db;
 USE workout_tracking_db;
 
 -- OP1 - UTENTI

@@ -14,7 +14,7 @@ public final class Iscrizione {
     public final LocalDateTime dataDisiscrizione;
 
     public Iscrizione(String username, int idClub, String nomeClub,
-                      LocalDateTime dataIscrizione, LocalDateTime dataDisiscrizione) {
+            LocalDateTime dataIscrizione, LocalDateTime dataDisiscrizione) {
         this.username = username;
         this.idClub = idClub;
         this.nomeClub = nomeClub;
@@ -23,21 +23,21 @@ public final class Iscrizione {
     }
 
     public static final class DAO {
-        private DAO() { }
+        private DAO() {
+        }
 
         public static List<Iscrizione> list(Connection connection) {
             var result = new ArrayList<Iscrizione>();
             try (
-                var statement = DAOUtils.prepare(connection, Queries.LIST_ISCRIZIONI);
-                var rs = statement.executeQuery()
-            ) {
+                    var statement = DAOUtils.prepare(connection, Queries.LIST_ISCRIZIONI);
+                    var rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    var end = rs.getTimestamp("DateDistrict");
+                    var end = rs.getTimestamp("dataDisiscrizione");
                     result.add(new Iscrizione(
                             rs.getString("username"),
                             rs.getInt("IDClub"),
-                            rs.getString("NameClub"),
-                            rs.getTimestamp("Date").toLocalDateTime(),
+                            rs.getString("nomeClub"),
+                            rs.getTimestamp("dataIscrizione").toLocalDateTime(),
                             end == null ? null : end.toLocalDateTime()));
                 }
             } catch (Exception e) {
@@ -49,7 +49,7 @@ public final class Iscrizione {
         public static boolean hasActive(Connection connection, String username, int idClub) {
             try (var statement = DAOUtils.prepare(
                     connection, Queries.CHECK_ISCRIZIONE_ATTIVA, username, idClub);
-                 var rs = statement.executeQuery()) {
+                    var rs = statement.executeQuery()) {
                 return rs.next();
             } catch (Exception e) {
                 throw new DAOException(e);
@@ -57,7 +57,7 @@ public final class Iscrizione {
         }
 
         public static void insert(Connection connection, String username, int idClub,
-                                  LocalDateTime dataIscrizione) {
+                LocalDateTime dataIscrizione) {
             try (var statement = DAOUtils.prepare(
                     connection, Queries.INSERT_ISCRIZIONE,
                     username, idClub, Timestamp.valueOf(dataIscrizione))) {
@@ -70,7 +70,7 @@ public final class Iscrizione {
         public static LocalDateTime findActiveStart(Connection connection, String username, int idClub) {
             try (var statement = DAOUtils.prepare(
                     connection, Queries.FIND_ISCRIZIONE_ATTIVA, username, idClub);
-                 var rs = statement.executeQuery()) {
+                    var rs = statement.executeQuery()) {
                 if (!rs.next()) {
                     return null;
                 }
@@ -81,7 +81,7 @@ public final class Iscrizione {
         }
 
         public static void close(Connection connection, String username, int idClub,
-                                 LocalDateTime dataIscrizione, LocalDateTime dataDisiscrizione) {
+                LocalDateTime dataIscrizione, LocalDateTime dataDisiscrizione) {
             try (var statement = DAOUtils.prepare(
                     connection, Queries.CLOSE_ISCRIZIONE,
                     Timestamp.valueOf(dataDisiscrizione), username, idClub,

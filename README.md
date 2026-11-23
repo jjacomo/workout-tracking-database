@@ -1,63 +1,75 @@
 # Workout Tracking Database
 
-A database design and development project for a fitness tracking application inspired by platforms such as Strava. The system allows users to record, upload, and manage their workouts and training activities.
+A relational database design and Java desktop application inspired by fitness tracking platforms such as Strava, allowing athletes and clubs to record, manage, and analyze workouts, GPS segments, equipment usage, and competitions.
 
-## Project Overview
+Developed as the final project for the **Databases** (*Basi di Dati*) course in the B.Sc. in Computer Science and Engineering at the **University of Bologna** (Cesena Campus)[cite: 2, 4].
 
-The project was developed as part of the Database course at the University of Bologna. It focuses on the design and implementation of a relational database for managing sports activities and user-generated training data.
+---
 
-The repository includes the database schema, SQL scripts for data population, a technical report, and a Java application to interact with the database.
+## Project Overview & Database Design
 
-## Technologies
+The project covers the complete database engineering lifecycle—from requirements analysis and conceptual modeling to logical restructuring, normalization, and physical implementation[cite: 2, 4]:
 
-- **Database:** MariaDB / MySQL
-- **Programming language:** Java
-- **Build tool:** Gradle
-- **Database language:** SQL
+* **Conceptual & Logical Modeling:** Designed an Entity-Relationship (E-R) schema covering **14 core domain entities** (Users, Activities/Workouts, GPS Segments, Segment Crossings, Gear/Equipment, Clubs, Competitions/Races, Registrations, Participations, and Performance Reports)[cite: 1].
+* **Data Integrity & Optimization:** Enforced primary/foreign key constraints, domain checks, and normalized relational tables to eliminate data redundancy while supporting efficient analytical queries[cite: 4].
+* **Analytical & Operational Queries:** Implemented SQL queries to track athlete progress, segment leaderboards, equipment wear, club memberships, and race rankings[cite: 1, 4].
 
-## Application Screenshot
+---
 
-![Screen for creating a new race](docs/images/app-screenshot.png)
+## Software Architecture
+
+The companion Java application is structured following the **MVC (Model-View-Controller)** architectural pattern decoupled from persistence via a dedicated **DAO (Data Access Object)** layer over **JDBC**[cite: 1]:
+
+* **Model & DAO Layer (`DBModel`, `DAOUtils`, `DAOException`, `Queries`):** Encapsulates SQL statements, connection lifecycle management, and relational-to-object mapping[cite: 1].
+* **Controller Layer:** Coordinates user interactions, input validation, and data flow between the GUI and the persistence layer[cite: 1].
+* **View Layer:** Desktop graphical user interface for browsing workouts, uploading activities, and inspecting reports[cite: 1].
+
+---
+
+## Tech Stack
+
+* **DBMS:** MariaDB / MySQL
+* **Language:** Java (JDK 17+) & SQL[cite: 2, 7]
+* **Data Access:** JDBC[cite: 1]
+* **Build Tool:** Gradle (Kotlin DSL)
+
+---
 
 ## Entity-Relationship Diagram
 
-[![Final E/R schema preview](docs/images/er-schema.png)](docs/Report.pdf)
+![Entity-Relationship Diagram](./docs/images/er-schema.png)
 
-## Repository Structure
+---
 
-- `sql/database.sql` – Database schema and table definitions.
-- `sql/popolamento.sql` – Sample data for populating the database.
-- `docs/Report.pdf` – Project documentation and database design.
-- `app/` – Java application and database interaction logic.
+## Application Preview
 
-## Setup and Usage
+![Application Screenshot](./docs/images/app-screenshot.png)
 
-### 1. Database Setup
+---
 
-Start a MariaDB/MySQL server and create the database by running:
+## Quick Start
 
-```bash
-mysql -u root -p < database.sql
-```
+### Prerequisites
+* **Java Development Kit (JDK)** 17 or higher
+* **Docker** & **Docker Compose**
 
-### 2. Populate the Database
+### Run the Application
 
-Run the population script:
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/jjacomo/workout-tracking-database.git](https://github.com/jjacomo/workout-tracking-database.git)
+   cd workout-tracking-database
+   ```
 
-```bash
-mysql -u root -p allenamenti_db < popolamento.sql
-```
+2. **Start and automatically initialize the database:**
+   ```bash
+   docker compose up -d
+   ```
+   *(MariaDB starts on port `3307`, creates `workout_tracking_db`, builds the schema from `sql/database.sql`, and loads sample data from `sql/populate.sql`).*
 
-### 3. Run the Application
+3. **Launch the Java application:**
+   ```bash
+   ./gradlew run
+   ```
+   *(On Windows, run `gradlew.bat run`).*
 
-From the project root directory:
-
-```bash
-./gradlew run
-```
-
-The application will prompt for the database credentials at startup.
-
-## Documentation
-
-For a detailed explanation of the database design, requirements, and implementation, see [Report.pdf](docs/Report.pdf).
